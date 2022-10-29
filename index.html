@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      .icon {
+        display: none;
+      }
+      .hasicon {
+        position: relative;
+      }
+      .hasicon .icon {
+        display: block;
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 200px;
+        height: 150px;
+        cursor: pointer;
+      }
+
+      #content {
+        position: relative;
+      }
+      #content img {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      #myInput {
+        background-image: url('/css/searchicon.png');
+        background-position: 10px 10px;
+        background-repeat: no-repeat;
+        width: 100%;
+        font-size: 16px;
+        padding: 12px 20px 12px 40px;
+        border: 1px solid #ddd;
+        margin-bottom: 12px;
+      }
+      #myTable {
+        border-collapse: collapse;
+        width: 100%;
+        border: 1px solid #ddd;
+        font-size: 12px;
+      }
+      #myTable th,
+      #myTable td {
+        text-align: left;
+        padding: 12px;
+      }
+      #myTable tr {
+        border-bottom: 1px solid #ddd;
+      }
+      #myTable tr.header,
+      #myTable tr:hover {
+        background-color: #f1f1f1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="hasicon"></div>
+    <center>
+      <h1>AutoPilot DevOps - CheatSheet</h1>
+    </center>
+    <input
+      type="text"
+      id="myInput"
+      onkeyup="myFunction()"
+      placeholder="Search for commands..."
+      title="Type in a name"
+    />
+    <table id="myTable">
+      <tr class="header">
+        <th style="width: 40%">Command</th>
+        <th style="width: 60%">Description</th>
+      </tr>
+      <tr>
+        <td>Hello</td>
+        <td>Verify If ChatBot is Online</td>
+      </tr>
+      <tr>
+        <td>Create new Instance</td>
+        <td>Used to Create a new EC2 Instance</td>
+      </tr>
+      <tr>
+        <td>Stop Instance</td>
+        <td>Used to stop the EC2 Instance</td>
+      </tr>
+      <tr>
+        <td>Start the Instance</td>
+        <td>Used to start the EC2 Instance</td>
+      </tr>
+    </table>
+  </body>
+  <script>
+    function myFunction() {
+      console.log('fired!');
+      var input, filter, table, tr, td, i, txtValue;
+      input = document.getElementById('myInput');
+      filter = input.value.toUpperCase();
+      table = document.getElementById('myTable');
+      tr = table.getElementsByTagName('tr');
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName('td')[0];
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = '';
+          } else {
+            tr[i].style.display = 'none';
+          }
+        }
+      }
+    }
+  </script>
+</html>
