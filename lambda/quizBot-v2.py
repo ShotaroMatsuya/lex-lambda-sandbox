@@ -375,7 +375,7 @@ def set_quiz(chapter_code, question_num):
             "id": 1,
             "q": "***食道癌***の危険因子として喫煙がある．",
             "kind": "ChoiceBool",
-            "a": "はい",
+            "a": ["はい"],
             "secondary_a": [],
             "comment": "喫煙の他，飲酒や高塩食，熱い食事の常用などがリスク",
             "hint": "関連問題：97E49 93E13 93D6",
@@ -385,17 +385,17 @@ def set_quiz(chapter_code, question_num):
             "q": "腹腔鏡の写真を示す。矢印の***臓器***はなにか",
             "kind": "Image",
             "image": "https://lex-demo-buckets-qb.s3.amazonaws.com/108E021.jpg",
-            "a": "結腸",
-            "secondary_a": ["大腸"],
+            "a": ["結腸", "横行結腸", "上行結腸", "下行結腸"],
+            "secondary_a": ["大腸", "盲腸", "S状結腸", "ヒモ"],
             "comment": "結腸ひもがあるので***結腸***です",
-            "hint": "関連問題：108E21",
+            "hint": "漢字2文字で",
         },
         {
             "id": 3,
             "q": """ WHO憲章前文に述べられている健康の定義を示す．  
             Health is a state of complete physical, mental and social well-being and not merely the absence of disease or <u>（　　　　　）</u> .  
             ***(　)に入るのは何？***""",
-            "a": "infirmity",
+            "a": ["infirmity", "Infirmity"],
             "secondary_a": ["weakness", "feebleness", "imbecility"],
             "kind": "Desc",
             "comment": """「健康とは単に疾病がないとか，***虚弱***でないということではなく，<br />
@@ -422,7 +422,7 @@ def judge_answer(quiz, answer, exam_state_info, current_num):
     print("解答", quiz["a"])
     print("回答", answer)
     print(exam_state_info)
-    if quiz["a"] == answer:
+    if answer in quiz["a"]:
         new_state = update_exam_state_info(
             exam_state_info, quiz, current_num, "correct"
         )
@@ -433,7 +433,7 @@ def judge_answer(quiz, answer, exam_state_info, current_num):
         new_state = update_exam_state_info(
             exam_state_info, quiz, current_num, "incorrect"
         )
-        output_message = f"""うーん いい線いっているけど不正解！　正解は***{quiz["a"]}***ね。
+        output_message = f"""うーん いい線いっているけど不正解！　正解は ***{quiz["a"][0]}*** ね。
         コメント：{quiz['comment']}
         """
         return [new_state, output_message]
@@ -441,7 +441,7 @@ def judge_answer(quiz, answer, exam_state_info, current_num):
         new_state = update_exam_state_info(
             exam_state_info, quiz, current_num, "incorrect"
         )
-        output_message = f"""残念....  正解は***{quiz["a"]}***ね。
+        output_message = f"""残念....  正解は ***{quiz["a"][0]}*** ね。
         コメント： {quiz['comment']}"""
         return [new_state, output_message]
 
